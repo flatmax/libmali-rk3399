@@ -2,35 +2,18 @@
 
 The ARM Mali GPU user space drivers for Rockchip RK3399.
 
-## Why need GBM wrapper?
-
-### Issues
+## Why do we need a GBM wrapper?
 
 ```
-/usr/bin/gnome-shell: symbol lookup error: /lib/libmutter-4.so.0: undefined symbol: gbm_bo_get_offset
+[02:08:23.027] Command line: weston --tty 2
+[02:08:23.027] OS: Linux, 4.4.179, #1 SMP Thu Nov 7 08:32:22 AEDT 2019, aarch64
+[02:08:23.028] Starting with no config file.
+[02:08:23.028] Output repaint window is 7 ms maximum.
+[02:08:23.029] Loading module '/usr/lib/libweston-5/drm-backend.so'
+[02:08:23.077] Failed to load module: /usr/lib/libweston-5/drm-backend.so: undefined symbol: gbm_bo_get_offset
+[02:08:23.077] fatal: failed to create compositor backend
 ```
 
-### Implemented Symbols
-* gbm_bo_get_handle_for_plane
-* gbm_bo_get_modifier
-* gbm_bo_get_offset
-* gbm_bo_get_plane_count
-* gbm_bo_get_stride_for_plane
-* gbm_surface_create_with_modifiers
+## This software can be used with the buildroot external repo for the Nano Pi Neo4 and M4 or other rk3399 based SoCs :
 
-## How to use?
-
-```
-git clone https://github.com/heiher/libmali-rk3399
-cd libmali-rk3399
-
-# Build gbm wrapper
-make
-
-# Install to system
-sudo cp conf/mali.conf /etc/ld.so.conf.d/
-sudo cp -rd lib /usr/lib/mali
-
-# Update ld.so cache
-sudo ldconfig
-```
+https://github.com/flatmax/NanoPi.Neo4.buildroot.external
